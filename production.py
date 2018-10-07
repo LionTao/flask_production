@@ -15,7 +15,7 @@ def readData():
         line = line.split(' ')
         res.append(line[len(line) - 1])
         line.pop()
-        fact.append(line[:-1])
+        fact.append(line)
     fo.close()
     return fact, res,
 
@@ -73,7 +73,7 @@ def forward(input):
 def reverse(input):
     topological()
     facts = input.split(' ')
-    print("facts",facts)
+    # print("facts",facts)
     db_facts, db_res = readData_reverse()
     # data preparation done
 
@@ -83,7 +83,7 @@ def reverse(input):
     res = ""  # 存储推导结果
 
     for f in db_facts:
-        print("f",temp_db)
+        # print("f",temp_db)
         if f in temp_db:
             ans = db_res[db_facts.index(f)]
             # db_res 是由 list 组成的list

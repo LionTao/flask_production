@@ -52,17 +52,18 @@ def main():
                 facts=new_res
                 msg=json.dumps({"mode":"init","data":new_res})
                 api_res=requests.post('http://127.0.0.1:5000/api/forward/',data=msg)
+                # print("api_res",api_res.json())
                 if api_res.json()["err"]==0 and api_res.json()["mode"]==1:
-                    # wo got something to ask
+                    # we got something to ask
                     ask=True
                     question="请问有 “{}” 这个条件吗？".format(api_res.json()["msg"])
                     return redirect('/')
                 res=api_res.json()["msg"]
-                print(res)
+                # print(res)
 
         if choice.validate_on_submit(askForm):
             answer=askForm.mychoice.data
-            print("answer",answer,type(answer))
+            # print("answer",answer,type(answer))
             msg=json.dumps({"mode":"answer","data":answer})
             api_res=requests.post('http://127.0.0.1:5000/api/forward/',data=msg)
             if api_res.json()["err"] == 0 and api_res.json()["mode"] == 1:
@@ -100,11 +101,11 @@ def main_reverse():
                     return redirect('/reverse')
                 res=api_res.json()["msg"]["res"]
                 process=api_res.json()["msg"]["process"]
-                print(res)
+                # print(res)
 
         if choice.validate_on_submit(askForm):
             answer=askForm.mychoice.data
-            print("answer",answer,type(answer))
+            # print("answer",answer,type(answer))
             msg=json.dumps({"mode":"answer","data":answer})
             api_res=requests.post('http://127.0.0.1:5000/api/reverse/',data=msg)
             if api_res.json()["err"] == 0 and api_res.json()["mode"] == 1:
@@ -129,7 +130,7 @@ def doforward():
     if request.method == "POST":
         # TODO:Do Forward production
         msg=json.loads(request.data)
-        print("forward api get:",msg)
+        # print("forward api get:",msg)
         return jsonify(json.loads(forwardDispatcher(request.data)))
         # return forwardDispatcher(request.data)
 
@@ -142,7 +143,7 @@ def doreverse():
     if request.method == "POST":
         # TODO:Do Forward production
         msg=json.loads(request.data)
-        print("forward api get:",msg)
+        # print("forward api get:",msg)
         return jsonify(json.loads(reverseDispatcher(request.data)))
         # return forwardDispatcher(request.data)
 

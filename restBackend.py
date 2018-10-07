@@ -23,13 +23,15 @@ def forwardDispatcher(message):
     elif message["mode"] == "answer":
         if message["data"] == "1":
             facts += " " + waiting
-            print("waiting", waiting)
+            # print("waiting", waiting)
         if len(confirmation_list) > 0:
             waiting = confirmation_list.pop()
             return json.dumps({"err": 0, "mode": 1, "msg": waiting})
         else:
             waiting = ""
 
+
+    # print("facts",facts)
     # using existing facts to do forward production
     process, res = forward(facts)
 
@@ -44,6 +46,7 @@ def forwardDispatcher(message):
         return json.dumps({"err": 0, "mode": 1, "msg": waiting})
     elif res != "" and process != "":
         # figure out a conclusion
+        # print("Jesus",process,res)
         return json.dumps({"err": 0, "mode": 0, "msg": {"process": process, "res": res}})
     else:
         return json.dumps({"err": 1, "mode": 1, "msg": "I must miss something"})
@@ -53,7 +56,7 @@ def reverseDispatcher(message):
 
     message = json.loads(message)
 
-    print("message",len(message["data"]))
+    # print("message",len(message["data"]))
     if message["mode"] == "init":
         print('initing....')
         if len(message["data"])>1:
@@ -64,7 +67,7 @@ def reverseDispatcher(message):
     elif message["mode"] == "answer":
         if message["data"] == "1":
             facts += " " + waiting
-            print("waiting", waiting)
+            # print("waiting", waiting)
         if len(confirmation_list) > 0:
             waiting = confirmation_list.pop()
             return json.dumps({"err": 0, "mode": 1, "msg": waiting})
@@ -72,7 +75,7 @@ def reverseDispatcher(message):
             waiting = ""
 
     # using existing facts to do forward production
-    print("facts in dispatcher",facts)
+    # print("facts in dispatcher",facts)
     process, res = reverse(facts)
 
     if res == "" and process == "":
