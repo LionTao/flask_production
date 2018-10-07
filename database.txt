@@ -1,0 +1,5 @@
+5.56 rifle
+7.62 rifle
+20 mobile gun
+5.56 rifle american m16
+rifle russian 7.62 ak47
