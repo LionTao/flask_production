@@ -1,6 +1,6 @@
 # coding=utf-8
 import sys
-PATH = "test.txt"
+PATH = "database.txt"
 
 # 判断list中至少有一个在集合set中
 def ListOneInSet(li, se):

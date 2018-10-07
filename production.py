@@ -1,6 +1,6 @@
 from logic import ListInSet, ListOneInSet, topological
 
-PATH = "test.txt"
+PATH = "database.txt"
 
 
 def readData():

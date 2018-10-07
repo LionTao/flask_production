@@ -10,13 +10,13 @@ confirmation_list = set()
 waiting = ""
 
 
+# forward production controller
 def forwardDispatcher(message):
     global facts, process, res, isInit, confirmation_list, waiting
 
     message = json.loads(message)
 
     if message["mode"] == "init":
-        print('initing....')
         facts = ' '.join(message["data"])
     elif message["mode"] == "forward":
         facts += ''.join(message["data"])
@@ -48,13 +48,14 @@ def forwardDispatcher(message):
     else:
         return json.dumps({"err": 1, "mode": 1, "msg": "I must miss something"})
 
+
+# reverse production controller
 def reverseDispatcher(message):
     global facts, process, res, isInit, confirmation_list, waiting
 
     message = json.loads(message)
 
     if message["mode"] == "init":
-        print('initing....')
         if len(message["data"])>1:
             facts = ' '.join(message["data"])
         else:facts=message["data"][0]
